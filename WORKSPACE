@@ -2,26 +2,13 @@ workspace(name = "prototest")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
-    name = "protobuf_archive",
-    sha256 = "135d1105838932d04be79c06f429250531a73e699bd95aed83489aab9caa8622",
-    strip_prefix = "protobuf-2efcec95b6d42e66ada2a14f3fbf38762c52641c",
-    urls = [
-        # TODO(thomaswc): Restore this URL when it is up on the mirror.
-        # "https://mirror.bazel.build/github.com/google/protobuf/archive/a0e82dbe569552ac848d088391b63aaa1108d1a3.tar.gz",
-        "https://github.com/cmclean/protobuf/archive/2efcec95b6d42e66ada2a14f3fbf38762c52641c.tar.gz",
-    ],
+  name = "com_google_protobuf",
+  sha256 = "56541023a5dfa05de7dd5b7856bfd370047d6b93718eba068b43d1a4092b6cb6",
+  strip_prefix = "protobuf-ab8edf1dbe2237b4717869eaab11a2998541ad8d",
+  urls = [
+    "https://github.com/google/protobuf/archive/ab8edf1dbe2237b4717869eaab11a2998541ad8d.tar.gz",
+  ],
 )
-
-http_archive(
-      name = "com_google_protobuf",
-        sha256 = "135d1105838932d04be79c06f429250531a73e699bd95aed83489aab9caa8622",
-        strip_prefix = "protobuf-2efcec95b6d42e66ada2a14f3fbf38762c52641c",
-        urls = [
-          # TODO(thomaswc): Restore this URL when it is up on the mirror.
-          "https://mirror.bazel.build/github.com/google/protobuf/archive/2efcec95b6d42e66ada2a14f3fbf38762c52641c.tar.gz",
-          "https://github.com/cmclean/protobuf/archive/2efcec95b6d42e66ada2a14f3fbf38762c52641c.tar.gz",
-        ],
-  )
 
 http_archive(
       name = "six_archive",
