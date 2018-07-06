@@ -10,14 +10,13 @@ http_archive(
   ],
 )
 
-
+# local_config_python gets us a path to the Python.h for building the C++ protobuf backend for Python.
 new_local_repository(
     name = "local_config_python",
     path = "/usr/include",
     build_file_content = """
 cc_library(  
     name = "python_headers",
-    # srcs = ["lib/python3.5/config-3.5m-x86_64-linux-gnu/libpython3.5.so"],
     hdrs = glob(["python2.7/*.h"]),
     includes = ["python2.7/"],
     visibility = ["//visibility:public"]
@@ -25,25 +24,10 @@ cc_library(
     """
     )
 
-# new_local_repository(
-#     name = "local_config_python",
-#     path = "/usr/include/python2.7",
-#     build_file_content = """
-# cc_library(  
-#     name = "python_headers",
-#     # srcs = ["lib/python3.5/config-3.5m-x86_64-linux-gnu/libpython3.5.so"],
-#     hdrs = glob(["*.h"]),
-#     includes = ["./"],
-#     visibility = ["//visibility:public"]
-# )
-#     """
-#     )
-
-
-# new_local_repository(
-#     path = "/usr/include/python2.7",
-#     build_file = "//third_party:python.BUILD",
-# )
+bind(
+    name = "python_headers",
+    actual = "@local_config_python//:python_headers",
+)
 
 http_archive(
       name = "six_archive",
@@ -55,11 +39,6 @@ http_archive(
       strip_prefix = "six-1.10.0",
       build_file = "//third_party:six.BUILD",
   )
-
-bind(
-    name = "python_headers",
-    actual = "//util/python:python_headers",
-)
 
 bind(
     name = "six",
