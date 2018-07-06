@@ -10,6 +10,41 @@ http_archive(
   ],
 )
 
+
+new_local_repository(
+    name = "local_config_python",
+    path = "/usr/include",
+    build_file_content = """
+cc_library(  
+    name = "python_headers",
+    # srcs = ["lib/python3.5/config-3.5m-x86_64-linux-gnu/libpython3.5.so"],
+    hdrs = glob(["python2.7/*.h"]),
+    includes = ["python2.7/"],
+    visibility = ["//visibility:public"]
+)
+    """
+    )
+
+# new_local_repository(
+#     name = "local_config_python",
+#     path = "/usr/include/python2.7",
+#     build_file_content = """
+# cc_library(  
+#     name = "python_headers",
+#     # srcs = ["lib/python3.5/config-3.5m-x86_64-linux-gnu/libpython3.5.so"],
+#     hdrs = glob(["*.h"]),
+#     includes = ["./"],
+#     visibility = ["//visibility:public"]
+# )
+#     """
+#     )
+
+
+# new_local_repository(
+#     path = "/usr/include/python2.7",
+#     build_file = "//third_party:python.BUILD",
+# )
+
 http_archive(
       name = "six_archive",
       urls = [
