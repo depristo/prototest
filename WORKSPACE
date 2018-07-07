@@ -1,14 +1,25 @@
 workspace(name = "prototest")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# Recent release version; doens't have proto_api
+# http_archive(
+#   name = "com_google_protobuf",
+#   sha256 = "56541023a5dfa05de7dd5b7856bfd370047d6b93718eba068b43d1a4092b6cb6",
+#   strip_prefix = "protobuf-ab8edf1dbe2237b4717869eaab11a2998541ad8d",
+#   urls = [
+#     "https://github.com/google/protobuf/archive/ab8edf1dbe2237b4717869eaab11a2998541ad8d.tar.gz",
+#   ],
+# )
+
 http_archive(
   name = "com_google_protobuf",
-  sha256 = "56541023a5dfa05de7dd5b7856bfd370047d6b93718eba068b43d1a4092b6cb6",
-  strip_prefix = "protobuf-ab8edf1dbe2237b4717869eaab11a2998541ad8d",
+  sha256 = "91a1f9f0e2995e88751e9dba5703e293c25e26c653935b236ea721f7f1401d7d",
+  strip_prefix = "protobuf-df9ff6b90ec31bf54d765bd49e47f13e96a6300d",
   urls = [
-    "https://github.com/google/protobuf/archive/ab8edf1dbe2237b4717869eaab11a2998541ad8d.tar.gz",
+    "https://github.com/depristo/protobuf/archive/df9ff6b90ec31bf54d765bd49e47f13e96a6300d.tar.gz",
   ],
 )
+
 
 # local_config_python gets us a path to the Python.h for building the C++ protobuf backend for Python.
 new_local_repository(
@@ -51,3 +62,8 @@ bind(
     actual = "@six_archive//:six",
 )
 
+new_local_repository(
+    name = "clif",
+    build_file = "third_party/clif.BUILD",
+    path = "/usr/local",
+)
